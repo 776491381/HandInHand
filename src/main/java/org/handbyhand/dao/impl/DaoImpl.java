@@ -38,5 +38,12 @@ public class DaoImpl implements Dao {
         return userinfo;
     }
 
+    public int reg(String username, String passwd) {
+
+
+
+        return 0;
+    }
+
 
 }

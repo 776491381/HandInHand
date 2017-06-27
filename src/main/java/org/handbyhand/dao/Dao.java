@@ -10,6 +10,7 @@ import org.handbyhand.entity.UserInfo;
 public interface Dao {
 
      UserInfo login(String username, String passwd);
+     int reg(String username,String passwd);
 
 }
 
