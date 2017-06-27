@@ -11,6 +11,7 @@ public interface Dao {
 
      UserInfo login(String username, String passwd);
 
+
 }
 
 
