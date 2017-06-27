@@ -7,7 +7,24 @@ public class UserInfo {
 
     private String username;
     private String passwd;
-//    private String userid;
+    private String userId;
+
+    public String getPasswd() {
+        return passwd;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public UserInfo(String username, String passwd) {
+        this.username = username;
+        this.passwd = passwd;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
 
     public String getUsername() {
         return username;
@@ -17,24 +34,9 @@ public class UserInfo {
         this.username = username;
     }
 
-
-//    public String getPasswd() {
-//        return passwd;
-//    }
-
     public void setPasswd(String passwd) {
         this.passwd = passwd;
     }
-
-
-//    public String getUserid() {
-//        return userid;
-//    }
-
-//    public void setUserid(String userid) {
-//        this.userid = userid;
-//    }
-
 
     @Override
     public String toString() {

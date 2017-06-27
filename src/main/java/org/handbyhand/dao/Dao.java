@@ -1,5 +1,6 @@
 package org.handbyhand.dao;
 
+import org.handbyhand.entity.RespResult;
 import org.handbyhand.entity.UserInfo;
 
 
@@ -10,7 +11,9 @@ import org.handbyhand.entity.UserInfo;
 public interface Dao {
 
      UserInfo login(String username, String passwd);
-     int reg(String username,String passwd);
+     RespResult sign(String username, String passwd);
+
+
 
 }
 

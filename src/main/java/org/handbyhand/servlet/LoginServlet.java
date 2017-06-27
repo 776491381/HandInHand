@@ -1,7 +1,9 @@
 package org.handbyhand.servlet;
 
+import com.alibaba.fastjson.JSONObject;
 import org.handbyhand.dao.Dao;
 import org.handbyhand.dao.impl.DaoImpl;
+import org.handbyhand.entity.RespResult;
 import org.handbyhand.entity.UserInfo;
 
 import javax.servlet.ServletException;
@@ -31,18 +33,30 @@ public class LoginServlet extends HttpServlet {
         String message = "username or password is worong!";
 
         System.out.println(userinfo.toString());
-
+        RespResult respResult ;
         if(userinfo == null){
-            req.setAttribute("message",message);
-            req.getRequestDispatcher("login_error.jsp").forward(req,resp);
+            respResult = new RespResult(false,-1,"用户不存在");
+//            req.setAttribute("message",message);
+//            req.getRequestDispatcher("login_error.jsp").forward(req,resp);
+
 
         }else{
+            respResult = new RespResult(true,userinfo,1,"登陆成功");
             //req.getRequestDispatcher("index.jsp").forward(req,resp);
-            PrintWriter p = resp.getWriter();
-            p.print("success");
-            p.flush();
+//            PrintWriter p = resp.getWriter();
+//            p.print("success");
+//            p.flush();
+
 
         }
+
+        JSONObject jsonObject = (JSONObject) JSONObject.toJSON(respResult);
+        resp.setContentType("application/json;charset=UTF-8");
+        resp.setCharacterEncoding("UTF-8");
+        resp.setHeader("Cache-Control", "no-cache");
+        PrintWriter returnValue=resp.getWriter();
+        returnValue.write(jsonObject.toJSONString());
+
 
 
     }

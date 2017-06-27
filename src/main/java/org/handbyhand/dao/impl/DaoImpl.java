@@ -2,6 +2,7 @@ package org.handbyhand.dao.impl;
 
 import org.handbyhand.dao.Dao;
 import org.handbyhand.dbutils.DBUtil;
+import org.handbyhand.entity.RespResult;
 import org.handbyhand.entity.UserInfo;
 
 import java.sql.Connection;
@@ -24,10 +25,10 @@ public class DaoImpl implements Dao {
             ResultSet rs = conn.createStatement().executeQuery(sql);
 
             while (rs.next()) {
-                userinfo = new UserInfo();
+                userinfo = new UserInfo(rs.getString("user_name"),rs.getString("user_passwd"));
                 System.out.println("Dao username " + rs.getString("user_name"));
-                userinfo.setUsername(rs.getString("user_name"));
-                userinfo.setPasswd(rs.getString("user_passwd"));
+//                userinfo.setUsername(rs.getString("user_name"));
+//                userinfo.setPasswd(rs.getString("user_passwd"));
             }
 
 
@@ -38,12 +39,22 @@ public class DaoImpl implements Dao {
         return userinfo;
     }
 
-    public int reg(String username, String passwd) {
-
-
-
-        return 0;
+    public RespResult sign(String username, String passwd) {
+        RespResult respResult = null;
+        Connection conn = DBUtil.getInstance().getConn();
+        UserInfo userinfo = new UserInfo(username,passwd);
+        String sql = "insert into user_info (user_name,user_passwd)values(\'"+username+"\',\'"+passwd+"\')";
+        System.out.println(sql);
+        try{
+            int update = conn.createStatement().executeUpdate(sql);
+            System.out.println(update);
+            if(update == 1){
+                respResult = new RespResult(true,userinfo,1,"注册成功" );
+            }else{
+                respResult = new RespResult(false,-1,"注册失败");
+            }
+        }catch(Exception ignore ){
+        }
+        return respResult;
     }
-
-
 }

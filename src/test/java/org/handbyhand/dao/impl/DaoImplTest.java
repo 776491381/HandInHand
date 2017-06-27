@@ -11,6 +11,14 @@ import static org.junit.Assert.*;
  */
 public class DaoImplTest {
     @Test
+    public void sign() throws Exception {
+
+        Dao dao = new DaoImpl();
+        System.out.println(dao.sign("fyppy","123456"));
+
+    }
+
+    @Test
     public void login() throws Exception {
         Dao dao = new DaoImpl();
         UserInfo userInfo = dao.login("fyy", "123456");
